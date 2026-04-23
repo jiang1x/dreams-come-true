@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreams Come True - 魔法故事绘本</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            candy: {
+              mint: '#7FFFD4',
+              mintDark: '#5FD4B0',
+              yellow: '#FFE66D',
+              yellowDark: '#E6CF5C',
+              pink: '#FF8FA3',
+              pinkDark: '#E67387',
+              blue: '#7EC8E3',
+              blueDark: '#5EA8C3',
+              cream: '#FFF8E7',
+              orange: '#FFB347',
+              lavender: '#DDA0DD',
+            }
+          },
+          animation: {
+            'bounce-slow': 'bounce-slow 2s ease-in-out infinite',
+            'wiggle': 'wiggle 0.5s ease-in-out infinite',
+            'pop': 'pop 0.3s ease-out',
+            'float': 'float 3s ease-in-out infinite',
+            'slide-in': 'slide-in 0.5s ease-out forwards',
+            'fade-in': 'fade-in 0.4s ease-out forwards',
+            'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+            'sparkle': 'sparkle 1.5s ease-in-out infinite',
+          },
+          keyframes: {
+            'bounce-slow': {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            'wiggle': {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            },
+            'pop': {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            'float': {
+              '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(2deg)' },
+            },
+            'slide-in': {
+              '0%': { transform: 'translateX(-30px)', opacity: '0' },
+              '100%': { transform: 'translateX(0)', opacity: '1' },
+            },
+            'fade-in': {
+              '0%': { opacity: '0', transform: 'translateY(15px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'pulse-soft': {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.05)' },
+            },
+            'sparkle': {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.5', transform: 'scale(0.8)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: linear-gradient(180deg, #FFF8E7 0%, #E8F5E9 30%, #FFF3E0 60%, #FCE4EC 100%);
+      min-height: 100vh;
+    }
+
+    .kid-font {
+      font-family: 'ZCOOL KuaiLe', 'Noto Sans SC', cursive;
+    }
+
+    .cartoon-card {
+      border: 4px solid rgba(0,0,0,0.12);
+      box-shadow: 8px 8px 0 rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+    }
+
+    .cartoon-card:hover {
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+    }
+
+    .cartoon-btn {
+      border: 4px solid rgba(0,0,0,0.15);
+      box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+      transition: all 0.1s ease;
+    }
+
+    .cartoon-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 0 0 rgba(0,0,0,0.15);
+    }
+
+    .cartoon-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: white;
+      border: 4px solid rgba(0,0,0,0.1);
+      border-radius: 24px;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 30px;
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 16px solid rgba(0,0,0,0.1);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 33px;
+      width: 0;
+      height: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-top: 13px solid white;
+      z-index: 1;
+    }
+
+    .magic-canvas {
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .polaroid-kid {
+      background: white;
+      border: 6px solid white;
+      box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid-kid:hover {
+      transform: translateY(-8px) rotate(0deg) !important;
+    }
+
+    .star-bg {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.4) 2px, transparent 2px);
+      background-size: 24px 24px;
+    }
+
+    .wiggle-hover:hover {
+      animation: wiggle 0.4s ease-in-out;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+
+    textarea:focus, input:focus {
+      outline: none;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState, useRef, useEffect, useCallback } = React;
+
+    // ===== Inline SVG Icons =====
+    const StarIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    );
+
+    const MicIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+        <line x1="12" x2="12" y1="19" y2="22"/>
+      </svg>
+    );
+
+    const SparklesIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+        <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+      </svg>
+    );
+
+    const BookOpenIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    );
+
+    const ChevronLeftIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+    );
+
+    const ChevronRightIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    );
+
+    const RotateCcwIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    );
+
+    const Volume2Icon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+    );
+
+    const Wand2Icon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/>
+        <path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>
+      </svg>
+    );
+
+    const ArrowRightIcon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+      </svg>
+    );
+
+    const Undo2Icon = ({ size = 24, className = "" }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <path d="M9 14 4 9l5-5"/>
+        <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/>
+      </svg>
+    );
+
+    // ===== Constants =====
+    const GUIDE_MESSAGES = [
+      "你的超级英雄叫什么名字呀？",
+      "故事是在森林还是外太空？",
+      "这是一场大冒险吗？",
+      "有小动物朋友吗？",
+      "最后大家开心吗？",
+      "最坏的大坏蛋是谁？",
+      "魔法道具长什么样？",
+    ];
+
+    const PHASES = {
+      DRAWING: 'drawing',
+      VOICE: 'voice',
+      OUTLINE: 'outline',
+      BOOK: 'book',
+    };
+
+    // ===== Wild Imagination Dictionary (Bilingual) =====
+    const IMAGINATION = {
+      settings: [
+        { cn: '宇宙糖果空间站', en: 'candy space station floating in cosmos, colorful planets' },
+        { cn: '会打嗝的火山口', en: 'volcano that hiccups with rainbow lava and bubble gum smoke' },
+        { cn: '长满长颈鹿的深海', en: 'deep ocean filled with giraffes wearing scuba gear, coral castles' },
+        { cn: '饼干拼成的城堡', en: 'castle made of giant cookies and gingerbread, frosting windows' },
+        { cn: '云朵棉花糖工厂', en: 'cloud marshmallow factory with cotton candy machines' },
+        { cn: '颠倒的彩虹森林', en: 'upside-down rainbow forest with glowing trees and floating fruits' },
+        { cn: '泡泡组成的地下城', en: 'underground city made of giant bubbles and crystal lights' },
+        { cn: '会走路的冰淇淋山', en: 'walking ice cream mountain with chocolate rivers' },
+        { cn: '星星碎片海滩', en: 'beach covered with star fragments and glowing shells' },
+        { cn: '巨型蘑菇城市', en: 'giant mushroom city with toadstool houses and fairy lights' },
+        { cn: '果冻河流山谷', en: 'jelly river valley with bouncy bridges and fruit boats' },
+        { cn: '枕头做成的沙漠', en: 'desert made of fluffy pillows and blanket dunes' },
+        { cn: '由拼图块组成的天空', en: 'sky made of colorful puzzle pieces and floating blocks' },
+        { cn: '钟表滴答作响的糖果镇', en: 'candy town with ticking clock towers and lollipop streetlights' },
+        { cn: '彩虹尽头的邮局', en: 'post office at the end of rainbow with flying mail balloons' },
+      ],
+      creatures: [
+        { cn: '戴墨镜的猫头鹰', en: 'cool owl wearing sunglasses and leather jacket' },
+        { cn: '三只脚的章鱼', en: 'three-legged octopus with polka dot tentacles' },
+        { cn: '会唱歌的土豆', en: 'singing potato with microphone and sparkly bow tie' },
+        { cn: '穿宇航服的蜗牛', en: 'snail in astronaut suit with jetpack shell' },
+        { cn: '喷彩虹的龙宝宝', en: 'baby dragon breathing rainbow fire, tiny wings' },
+        { cn: '戴皇冠的刺猬', en: 'hedgehog wearing golden crown and velvet cape' },
+        { cn: '透明的北极熊', en: 'transparent polar bear with glowing heart visible inside' },
+        { cn: '长翅膀的西瓜', en: 'watermelon with angel wings and friendly smile' },
+        { cn: '会跳舞的仙人掌', en: 'dancing cactus with ballet shoes and tutu' },
+        { cn: '戴领结的青蛙', en: 'frog wearing red bow tie and top hat' },
+        { cn: '戴眼镜的鲸鱼', en: 'whale wearing round glasses and reading a book' },
+        { cn: '浑身发光的小蚂蚁', en: 'tiny glowing ant with lantern body and superhero cape' },
+      ],
+      events: [
+        { cn: '突然下起了流星雨口味的冰淇淋', en: 'meteor shower of ice cream flavors raining from sky' },
+        { cn: '重力突然反转大家都飘了起来', en: 'gravity suddenly reverses and everyone floats upward' },
+        { cn: '被一只戴墨镜的猫头鹰绑架去开演唱会', en: 'kidnapped by cool owl to perform in magical concert' },
+        { cn: '魔法道具变成了一只打嗝的青蛙', en: 'magic prop transforms into a hiccuping frog' },
+        { cn: '地面上突然冒出软软的果冻弹簧', en: 'jelly springs pop up from ground making everyone bounce' },
+        { cn: '天空裂开了一个笑脸', en: 'sky cracks open revealing a giant smiling face' },
+        { cn: '所有的颜色开始互相交换', en: 'all colors start swapping places creating chaos' },
+        { cn: '时间突然变慢了十倍', en: 'time suddenly slows down by ten times' },
+        { cn: '影子从地上站起来开始说话', en: 'shadows stand up from ground and start talking' },
+        { cn: '云朵变成了巨大的棉花糖砸下来', en: 'clouds turn into giant marshmallows falling down' },
+        { cn: '河里流的不是水而是巧克力牛奶', en: 'river flows with chocolate milk instead of water' },
+        { cn: '所有的花朵同时开始打喷嚏', en: 'all flowers start sneezing simultaneously' },
+      ],
+      troubles: [
+        { cn: '弄丢了会发光的魔法勺子', en: 'lost the glowing magic spoon' },
+        { cn: '不小心把勇气药水喝成了瞌睡药水', en: 'accidentally drank sleeping potion instead of courage' },
+        { cn: '被困在了巨大的泡泡里出不来', en: 'trapped inside giant bubble floating away' },
+        { cn: '最好的朋友变成了一颗小石子', en: 'best friend turned into small pebble' },
+        { cn: '忘记带通往梦境的钥匙', en: 'forgot the key to dreamland' },
+        { cn: '脚被粘在了蜂蜜地板上', en: 'feet stuck to honey floor' },
+        { cn: '说话的声音变成了鸭子的叫声', en: 'voice turned into duck quacking' },
+        { cn: '眼前突然出现了一堵厚厚的棉花墙', en: 'thick cotton wall suddenly appears blocking path' },
+      ],
+      twists: [
+        { cn: '结果发现那只怪物只是想吃糖果', en: 'monster just wanted candy all along' },
+        { cn: '意外发现原来自己一直住在鱼肚子里', en: 'discovered they lived inside giant fish whole time' },
+        { cn: '从天而降的神秘包裹里装着另一个自己', en: 'mystery package from sky contains another self' },
+        { cn: '镜子里的倒影突然走了出来', en: 'reflection in mirror suddenly walks out' },
+        { cn: '原来一切只是一场梦...但枕头里真的有一枚金币', en: 'it was all a dream but pillow really has gold coin' },
+        { cn: '转身发现身后跟着一百个和自己一模一样的小复制人', en: 'hundred tiny clones following behind' },
+        { cn: '最好的朋友其实是一只伪装成猫咪的外星人', en: 'best friend was alien disguised as cat' },
+      ],
+      props: [
+        { cn: '会发光的魔法勺子', en: 'glowing magic spoon' },
+        { cn: '能让人飞起来的泡泡糖', en: 'bubble gum that makes you fly' },
+        { cn: '可以听懂动物语言的耳机', en: 'headphones that understand animal language' },
+        { cn: '画什么就成真了的蜡笔', en: 'crayon that makes drawings come true' },
+        { cn: '能让人缩小的蘑菇饼干', en: 'mushroom cookie that shrinks you' },
+        { cn: '装满星星的背包', en: 'backpack filled with glowing stars' },
+      ],
+      feelings: [
+        { cn: '心里像有一百只蝴蝶在跳舞', en: 'heart fluttering like a hundred butterflies dancing' },
+        { cn: '开心得想要原地转一百个圈', en: 'so happy wanting to spin one hundred times' },
+        { cn: '觉得自己变成了世界上最厉害的人', en: 'feeling like the most powerful person in world' },
+        { cn: '暖洋洋的像被太阳抱在怀里', en: 'warm like being hugged by the sun' },
+        { cn: '惊讶得下巴都快掉到了地上', en: 'surprised with jaw dropping to floor' },
+        { cn: '忍不住咯咯咯地笑出了声', en: 'cannot help giggling out loud' },
+      ]
+    };
+
+    // ===== Utilities =====
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function extractProtagonist(text) {
+      if (!text) return null;
+      const patterns = [
+        /叫\s*([^\s，。！？]{1,6})/,
+        /名字是\s*([^\s，。！？]{1,6})/,
+        /是\s*([^\s，。！？]{1,4})\s*[，。]/,
+        /^([^\s，。！？]{1,4})/
+      ];
+      for (const p of patterns) {
+        const m = text.match(p);
+        if (m) return m[1].trim();
+      }
+      return null;
+    }
+
+    // ===== Canvas Drawing Component =====
+    function MagicCanvas({ onLineComplete, onClear }) {
+      const canvasRef = useRef(null);
+      const [isDrawingState, setIsDrawingState] = useState(false);
+      const [hasDrawn, setHasDrawn] = useState(false);
+      const pointsRef = useRef([]);
+      const lastPosRef = useRef(null);
+      const isDrawingRef = useRef(false);
+
+      const getPos = (e) => {
+        const canvas = canvasRef.current;
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: (clientX - rect.left) * scaleX,
+          y: (clientY - rect.top) * scaleY,
+        };
+      };
+
+      const startDrawing = (e) => {
+        e.preventDefault();
+        isDrawingRef.current = true;
+        setIsDrawingState(true);
+        const pos = getPos(e);
+        pointsRef.current = [pos];
+        lastPosRef.current = pos;
+      };
+
+      const draw = (e) => {
+        if (!isDrawingRef.current) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        pointsRef.current.push(pos);
+
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        const last = lastPosRef.current || pos;
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.strokeStyle = '#E91E63';
+        ctx.lineWidth = 6;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+        lastPosRef.current = pos;
+      };
+
+      const stopDrawing = () => {
+        if (!isDrawingRef.current) return;
+        isDrawingRef.current = false;
+        setIsDrawingState(false);
+        setHasDrawn(true);
+        const pts = pointsRef.current;
+        if (pts.length > 5) {
+          const feature = analyzeLine(pts);
+          onLineComplete(feature);
+        }
+      };
+
+      const clear = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pointsRef.current = [];
+        lastPosRef.current = null;
+        isDrawingRef.current = false;
+        setIsDrawingState(false);
+        setHasDrawn(false);
+        onClear();
+      };
+
+      return (
+        <div className="w-full">
+          <div className="relative rounded-3xl overflow-hidden border-4 border-amber-800/20 shadow-lg"
+            style={{
+              background: 'linear-gradient(135deg, #8B7355 0%, #A0826D 50%, #8B7355 100%)',
+              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.05) 39px, rgba(0,0,0,0.05) 40px)',
+            }}
+          >
+            <div className="absolute inset-0 opacity-10 pointer-events-none"
+              style={{
+                backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.5\'/%3E%3C/svg%3E")',
+              }}
+            />
+            <canvas
+              ref={canvasRef}
+              width={640}
+              height={200}
+              className="magic-canvas w-full h-[200px] relative z-10"
+              onMouseDown={startDrawing}
+              onMouseMove={draw}
+              onMouseUp={stopDrawing}
+              onMouseLeave={stopDrawing}
+              onTouchStart={startDrawing}
+              onTouchMove={draw}
+              onTouchEnd={stopDrawing}
+            />
+            {!hasDrawn && (
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                <div className="text-amber-100/40 text-2xl kid-font font-bold select-none">
+                  🖍️ 在这里画出你的故事心情线！
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="flex justify-between items-center mt-3 px-1">
+            <span className="text-sm text-amber-800/60 kid-font">
+              {hasDrawn ? '✨ 画好了！线条已经被魔法捕捉' : '从左到右画一条线，魔法会读懂你的心'}
+            </span>
+            <button
+              onClick={clear}
+              className="cartoon-btn px-4 py-2 bg-candy-yellow rounded-2xl text-amber-800 text-sm font-bold kid-font flex items-center gap-1"
+            >
+              <Undo2Icon size={16} />
+              重画
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // ===== Smart Line Analysis (4 Segments) =====
+    function analyzeLine(points) {
+      if (points.length < 10) {
+        return makeDefaultAnalysis();
+      }
+
+      const sorted = [...points].sort((a, b) => a.x - b.x);
+      const minX = sorted[0].x;
+      const maxX = sorted[sorted.length - 1].x;
+      const rangeX = maxX - minX || 1;
+      const minY = Math.min(...sorted.map(p => p.y));
+      const maxY = Math.max(...sorted.map(p => p.y));
+      const rangeY = maxY - minY || 1;
+
+      const normalized = sorted.map(p => ({
+        x: (p.x - minX) / rangeX,
+        y: (p.y - minY) / rangeY,
+      }));
+
+      const phaseNames = [
+        { cn: '开端', en: 'beginning' },
+        { cn: '发展', en: 'development' },
+        { cn: '高潮', en: 'climax' },
+        { cn: '结局', en: 'ending' }
+      ];
+
+      const segSize = normalized.length / 4;
+      const segments = [];
+
+      for (let i = 0; i < 4; i++) {
+        const startIdx = Math.floor(i * segSize);
+        const endIdx = Math.floor((i + 1) * segSize);
+        const segPoints = normalized.slice(startIdx, Math.max(endIdx, startIdx + 1));
+
+        const avgY = segPoints.reduce((s, p) => s + p.y, 0) / segPoints.length;
+        const startY = segPoints[0].y;
+        const endY = segPoints[segPoints.length - 1].y;
+        const trend = endY < startY - 0.08 ? 'up' : endY > startY + 0.08 ? 'down' : 'flat';
+
+        const variance = segPoints.reduce((s, p) => s + Math.pow(p.y - avgY, 2), 0) / segPoints.length;
+        const volatility = variance > 0.05 ? 'high' : variance > 0.015 ? 'mid' : 'low';
+        const yLevel = avgY < 0.35 ? 'high' : avgY > 0.65 ? 'low' : 'mid';
+
+        const trendDesc = trend === 'up' ? '向上飞升' : trend === 'down' ? '坠入低谷' : '平稳前行';
+        const levelDesc = yLevel === 'high' ? '在云端' : yLevel === 'low' ? '在地底深处' : '在大地上';
+        const volDesc = volatility === 'high' ? '充满惊险转折' : volatility === 'mid' ? '有些小波折' : '一帆风顺';
+
+        segments.push({
+          phase: phaseNames[i].cn,
+          phaseEn: phaseNames[i].en,
+          yLevel,
+          trend,
+          volatility,
+          description: `${levelDesc}${trendDesc}，${volDesc}`
+        });
+      }
+
+      // Overall feature
+      const allY = normalized.map(p => p.y);
+      const avgAllY = allY.reduce((a, b) => a + b, 0) / allY.length;
+      const overallVar = allY.reduce((s, y) => s + Math.pow(y - avgAllY, 2), 0) / allY.length;
+      const sY = normalized[0].y;
+      const eY = normalized[normalized.length - 1].y;
+      const oTrend = eY < sY - 0.12 ? 'up' : eY > sY + 0.12 ? 'down' : 'flat';
+
+      let overallType = '平缓温馨';
+      let overallDesc = '像一条平静的小溪，温温柔柔地流向远方';
+
+      if (overallVar > 0.04 && segments.some(s => s.volatility === 'high')) {
+        overallType = '波澜壮阔';
+        overallDesc = '像坐过山车一样起起伏伏，充满惊险和刺激';
+      } else if (overallVar > 0.025 && segments.filter(s => s.trend !== 'flat').length >= 2) {
+        overallType = '神秘曲折';
+        overallDesc = '路途中有很多转弯，每一段都有新发现';
+      } else if (oTrend === 'up') {
+        overallType = '欢乐上扬';
+        overallDesc = '像彩虹一样向上飞，越飞越高，最后到达快乐星球';
+      }
+
+      return { overallFeature: { type: overallType, description: overallDesc }, segments };
+    }
+
+    function makeDefaultAnalysis() {
+      return {
+        overallFeature: { type: '平缓温馨', description: '像一条平静的小溪，温温柔柔地流向远方' },
+        segments: [
+          { phase: '开端', phaseEn: 'beginning', yLevel: 'mid', trend: 'flat', volatility: 'low', description: '在大地上平稳前行，一帆风顺' },
+          { phase: '发展', phaseEn: 'development', yLevel: 'mid', trend: 'flat', volatility: 'low', description: '在大地上平稳前行，一帆风顺' },
+          { phase: '高潮', phaseEn: 'climax', yLevel: 'mid', trend: 'flat', volatility: 'low', description: '在大地上平稳前行，一帆风顺' },
+          { phase: '结局', phaseEn: 'ending', yLevel: 'mid', trend: 'flat', volatility: 'low', description: '在大地上平稳前行，一帆风顺' },
+        ]
+      };
+    }
+
+    // ===== The Wild Imagination Engine =====
+    function generateStoryPages(voiceText, lineAnalysis) {
+      const protagonist = extractProtagonist(voiceText) || '小冒险家';
+      const { segments } = lineAnalysis;
+
+      const elements = {
+        setting: pickRandom(IMAGINATION.settings),
+        creature: pickRandom(IMAGINATION.creatures),
+        creature2: pickRandom(IMAGINATION.creatures),
+        event: pickRandom(IMAGINATION.events),
+        event2: pickRandom(IMAGINATION.events),
+        trouble: pickRandom(IMAGINATION.troubles),
+        twist: pickRandom(IMAGINATION.twists),
+        prop: pickRandom(IMAGINATION.props),
+        feeling: pickRandom(IMAGINATION.feelings),
+        feeling2: pickRandom(IMAGINATION.feelings),
+      };
+
+      return segments.map((seg, i) => {
+        const chineseText = generateSegmentChinese(seg, i, protagonist, voiceText, elements);
+        const englishPrompt = generateSegmentPrompt(seg, i, protagonist, elements);
+        return {
+          phase: seg.phase,
+          phaseEn: seg.phaseEn,
+          chineseText,
+          englishPrompt,
+          seg,
+        };
+      });
+    }
+
+    function generateSegmentChinese(seg, index, protagonist, voiceText, elements) {
+      const { phase, yLevel, trend, volatility } = seg;
+      const { setting, creature, creature2, event, event2, trouble, twist, prop, feeling, feeling2 } = elements;
+
+      if (phase === '开端') {
+        return generateBeginning(protagonist, voiceText, setting, creature, prop, yLevel, trend, volatility);
+      }
+      if (phase === '发展') {
+        return generateDevelopment(protagonist, setting, event, trouble, creature2, yLevel, trend, volatility);
+      }
+      if (phase === '高潮') {
+        return generateClimax(protagonist, setting, creature, event2, trouble, yLevel, trend, volatility);
+      }
+      return generateEnding(protagonist, twist, setting, creature2, feeling, feeling2, yLevel, trend, volatility);
+    }
+
+    function generateBeginning(hero, voiceText, setting, creature, prop, yLevel, trend, volatility) {
+      const intros = [
+        `从前，有一个叫${hero}的勇敢小朋友。`,
+        `在一个不可思议的早晨，${hero}睁开了眼睛。`,
+        `传说在很远很远的地方，住着一个叫${hero}的小孩。`,
+        `${hero}刚刚过完六岁生日，就收到了一份神秘礼物。`
+      ];
+      const intro = pickRandom(intros);
+
+      let scene = '';
+      if (yLevel === 'high') {
+        scene = `他正飘在${setting.cn}的顶端，脚下是软绵绵像棉花糖一样的云朵，远处还有流星在跳舞。`;
+      } else if (yLevel === 'low') {
+        scene = `他一不小心跌进了${setting.cn}的深处，四周黑漆漆的，只有发光的小蘑菇在眨眼睛。`;
+      } else {
+        scene = `他来到了传说中的${setting.cn}，这里的一切都在闪闪发光，连空气都是甜甜的味道。`;
+      }
+
+      const item = `他的口袋里装着${prop.cn}，这可是他最宝贝的道具，连睡觉都要抱在怀里。`;
+
+      let meet = '';
+      if (trend === 'up') {
+        meet = `忽然，一只${creature.cn}从天而降，拍着他的肩膀说："我等你好久啦！"`;
+      } else if (trend === 'down') {
+        meet = `突然，一只${creature.cn}慌慌张张地冲过来，大声喊道："不好了，大事不好了！"`;
+      } else {
+        meet = `不远处，一只${creature.cn}正悠闲地喝着茶，看见${hero}后开心地挥了挥手。`;
+      }
+
+      let mood = '';
+      if (volatility === 'high') {
+        mood = `${hero}的心跳得好快好快，感觉马上要有超级刺激的事情发生了！`;
+      } else if (volatility === 'mid') {
+        mood = `${hero}觉得有点紧张又有点期待，就像打开礼物盒之前的那种感觉。`;
+      } else {
+        mood = `一切都那么安静美好，${hero}深吸一口气，准备开始新的奇妙旅程。`;
+      }
+
+      return intro + scene + item + meet + mood;
+    }
+
+    function generateDevelopment(hero, setting, event, trouble, creature, yLevel, trend, volatility) {
+      let move = '';
+      if (yLevel === 'high') {
+        move = `${hero}越飞越高，穿过了三层不同颜色的彩虹，还和一只会说话的蝴蝶打了招呼。`;
+      } else if (yLevel === 'low') {
+        move = `${hero}在深深的地下摸索前行，墙上长满了发光的小蘑菇，脚下是软软像布丁一样的地面。`;
+      } else {
+        move = `${hero}大步走在${setting.cn}的石板路上，路边的房子都在哼着歌，窗户里飘出烤饼干的香味。`;
+      }
+
+      let happen = '';
+      if (trend === 'up') {
+        happen = `正当他开心的时候，${event.cn}！所有人都惊讶得张大了嘴巴！`;
+      } else if (trend === 'down') {
+        happen = `糟糕的是，${trouble.cn}！${hero}急得像热锅上的蚂蚁，不知道该怎么办才好。`;
+      } else {
+        happen = `走着走着，${event.cn}，把路过的${creature.cn}都吓了一跳，羽毛掉了一地。`;
+      }
+
+      let detail = '';
+      if (volatility === 'high') {
+        detail = `地面开始轰隆隆地摇晃，四周的${creature.cn}们四处奔逃，尖叫声和笑声混在一起。${hero}紧紧抓住身边的糖果柱子，心里像有一百只蝴蝶在跳舞！`;
+      } else if (volatility === 'mid') {
+        detail = `周围的空气变得暖暖的，一只${creature.cn}悄悄塞给他一颗亮晶晶的糖果，好像在说"加油哦"。`;
+      } else {
+        detail = `阳光洒在肩膀上，${hero}一边走一边收集路边发光的石头，觉得这世界真是太美好了。`;
+      }
+
+      return move + happen + detail;
+    }
+
+    function generateClimax(hero, setting, creature, event, trouble, yLevel, trend, volatility) {
+      let peak = '';
+      if (yLevel === 'high') {
+        peak = `${hero}终于来到了${setting.cn}的最高点，风大得差点把他吹走，头发都竖了起来！`;
+      } else if (yLevel === 'low') {
+        peak = `${hero}跌进了最深的谷底，四周全是黏糊糊像蜂蜜一样的东西，每走一步都要费好大的劲！`;
+      } else {
+        peak = `${hero}站在了${setting.cn}的中心广场，所有的灯都亮了起来，成千上万双眼睛注视着他！`;
+      }
+
+      let crisis = '';
+      if (trend === 'up') {
+        crisis = `就在这一刻，${event.cn}！这是一个千载难逢的机会，${hero}知道必须立刻行动！`;
+      } else if (trend === 'down') {
+        crisis = `突然，${trouble.cn}！更糟糕的是，${creature.cn}挡住了唯一的出路，还做了个鬼脸！`;
+      } else {
+        crisis = `然后，${event.cn}，时间仿佛静止了三秒钟，连风都不吹了。`;
+      }
+
+      let action = '';
+      if (volatility === 'high') {
+        action = `${hero}鼓起勇气，大喊一声冲了上去！他和${creature.cn}在空中翻了三个跟头，糖果、星星和彩带四处飞溅，场面混乱极了！最终，${hero}用一个超级厉害的翻滚滚到了终点！`;
+      } else if (volatility === 'mid') {
+        action = `${hero}闭上眼睛，深吸一口气，然后猛地睁开眼睛，大声说出了那句练习了很久的魔法咒语！光芒四射！`;
+      } else {
+        action = `${hero}不慌不忙地从口袋里掏出宝贝，轻轻吹了一口气。奇迹发生了，一切都变得完美起来。`;
+      }
+
+      return peak + crisis + action;
+    }
+
+    function generateEnding(hero, twist, setting, creature, feeling, feeling2, yLevel, trend, volatility) {
+      let resolve = '';
+      if (trend === 'up') {
+        resolve = `${hero}终于成功了！他开心得想要原地转一百个圈，笑得嘴巴都合不拢了！`;
+      } else if (trend === 'down') {
+        resolve = `虽然有点狼狈，但${hero}终于安全了。他拍了拍身上的灰，露出了满足的笑容。`;
+      } else {
+        resolve = `${hero}满意地拍了拍手，一切都很完美，就像他梦想中的那样。`;
+      }
+
+      const surprise = `就在这时，${twist.cn}！${hero}惊讶得下巴都快掉到了地上！`;
+
+      let warm = '';
+      if (yLevel === 'high') {
+        warm = `${hero}和${creature.cn}一起坐在云朵上看日落，${feeling.cn}。`;
+      } else if (yLevel === 'low') {
+        warm = `他们在地下发现了一片发光的秘密花园，${feeling.cn}。${creature.cn}还送了${hero}一颗发光的种子。`;
+      } else {
+        warm = `大家围坐在${setting.cn}的广场上，分享着今天的故事，${feeling.cn}，${feeling2.cn}。`;
+      }
+
+      const goodbye = `这真是最棒最神奇的一天呀！${hero}抱着新得到的礼物，蹦蹦跳跳地回家了。晚安，小英雄！`;
+
+      return resolve + surprise + warm + goodbye;
+    }
+
+    function generateSegmentPrompt(seg, index, protagonist, elements) {
+      const { phase, yLevel, trend, volatility } = seg;
+      const { setting, creature } = elements;
+
+      let scene = '';
+      if (phase === '开端') {
+        scene = `cute child adventurer in ${setting.en}, meeting friendly ${creature.en}`;
+      } else if (phase === '发展') {
+        scene = `cute child exploring ${setting.en}, magical colorful events happening`;
+      } else if (phase === '高潮') {
+        scene = `cute child hero at peak of adventure in ${setting.en}, dramatic magical moment`;
+      } else {
+        scene = `cute child celebrating with friends in ${setting.en}, warm sunset happy ending`;
+      }
+
+      if (yLevel === 'high') scene += ', flying high in sky among fluffy clouds';
+      if (yLevel === 'low') scene += ', deep underground cave with glowing mushrooms';
+      if (trend === 'up') scene += ', rising up with joy and sparkles';
+      if (trend === 'down') scene += ', falling into soft trap, comedic';
+      if (volatility === 'high') scene += ', chaotic exciting action scene, motion blur';
+      if (volatility === 'mid') scene += ', dynamic pose, magical energy swirling';
+      if (volatility === 'low') scene += ', peaceful cozy atmosphere, soft lighting';
+
+      return `${scene}, cute children book illustration, highly detailed, magical lighting, whimsical, vibrant colors, kawaii, storybook art, 8k quality`;
+    }
+
+    // ===== Story Pages to Outline Text =====
+    function pagesToOutline(pages) {
+      return pages.map((p, i) =>
+        `【第${i + 1}章 · ${p.phase}】\n${p.chineseText}`
+      ).join('\n\n');
+    }
+
+    function outlineToPages(outlineText) {
+      const parts = outlineText.split(/【第[一二三四1234]章 · [^】]+】/).filter(s => s.trim());
+      if (parts.length >= 4) {
+        return parts.slice(0, 4).map((s, i) => ({
+          phase: ['开端', '发展', '高潮', '结局'][i],
+          phaseEn: ['beginning', 'development', 'climax', 'ending'][i],
+          chineseText: s.trim(),
+        }));
+      }
+      // Fallback: split by double newlines
+      const lines = outlineText.split(/\n\n+/).filter(s => s.trim().length > 10);
+      if (lines.length >= 4) {
+        return lines.slice(0, 4).map((s, i) => ({
+          phase: ['开端', '发展', '高潮', '结局'][i],
+          phaseEn: ['beginning', 'development', 'climax', 'ending'][i],
+          chineseText: s.trim(),
+        }));
+      }
+      return [{ phase: '故事', phaseEn: 'story', chineseText: outlineText.trim() }];
+    }
+
+    // ===== Main App =====
+    function App() {
+      const [phase, setPhase] = useState(PHASES.DRAWING);
+      const [lineAnalysis, setLineAnalysis] = useState(null);
+      const [voiceText, setVoiceText] = useState('');
+      const [guideIndex, setGuideIndex] = useState(0);
+      const [isRecording, setIsRecording] = useState(false);
+      const [outline, setOutline] = useState('');
+      const [storyPages, setStoryPages] = useState([]);
+      const [pages, setPages] = useState([]);
+      const [currentPageIndex, setCurrentPageIndex] = useState(0);
+      const [isGenerating, setIsGenerating] = useState(false);
+      const [error, setError] = useState(null);
+      const [interimText, setInterimText] = useState('');
+      const [showGuide, setShowGuide] = useState(true);
+
+      const recognitionRef = useRef(null);
+      const bookRef = useRef(null);
+      const guideTimerRef = useRef(null);
+
+      const speechSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+
+      // Guide rotation
+      useEffect(() => {
+        if (phase !== PHASES.VOICE) return;
+        guideTimerRef.current = setInterval(() => {
+          setGuideIndex(prev => (prev + 1) % GUIDE_MESSAGES.length);
+        }, 3000);
+        return () => clearInterval(guideTimerRef.current);
+      }, [phase]);
+
+      // Speech setup
+      useEffect(() => {
+        if (!speechSupported) return;
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'zh-CN';
+
+        recognition.onstart = () => {
+          setIsRecording(true);
+          setInterimText('');
+          setShowGuide(false);
+        };
+        recognition.onresult = (event) => {
+          let finalTranscript = '';
+          let interimTranscript = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const t = event.results[i][0].transcript;
+            if (event.results[i].isFinal) finalTranscript += t;
+            else interimTranscript += t;
+          }
+          if (finalTranscript) {
+            setVoiceText(prev => prev + (prev && !prev.endsWith(' ') ? ' ' : '') + finalTranscript);
+          }
+          setInterimText(interimTranscript);
+        };
+        recognition.onerror = (event) => {
+          if (event.error !== 'no-speech' && event.error !== 'aborted') {
+            setError('语音识别出错: ' + event.error);
+          }
+          setIsRecording(false);
+          setInterimText('');
+          setShowGuide(true);
+        };
+        recognition.onend = () => {
+          setIsRecording(false);
+          setInterimText('');
+          setShowGuide(true);
+        };
+        recognitionRef.current = recognition;
+      }, [speechSupported]);
+
+      const toggleRecording = useCallback(() => {
+        if (!recognitionRef.current) return;
+        if (isRecording) recognitionRef.current.stop();
+        else {
+          setError(null);
+          try { recognitionRef.current.start(); } catch (e) {}
+        }
+      }, [isRecording]);
+
+      const handleLineComplete = (feature) => setLineAnalysis(feature);
+      const handleClearLine = () => setLineAnalysis(null);
+
+      const goToVoice = () => {
+        if (!lineAnalysis) {
+          setError('先画出你的魔法线条，小画家！');
+          return;
+        }
+        setError(null);
+        setPhase(PHASES.VOICE);
+      };
+
+      const goToOutline = () => {
+        if (!voiceText.trim()) {
+          setError('先对着麦克风讲讲你的故事吧！');
+          return;
+        }
+        setError(null);
+        const pages = generateStoryPages(voiceText, lineAnalysis);
+        setStoryPages(pages);
+        setOutline(pagesToOutline(pages));
+        setPhase(PHASES.OUTLINE);
+      };
+
+      const goBack = () => {
+        if (phase === PHASES.VOICE) setPhase(PHASES.DRAWING);
+        else if (phase === PHASES.OUTLINE) setPhase(PHASES.VOICE);
+        else if (phase === PHASES.BOOK) setPhase(PHASES.OUTLINE);
+      };
+
+      const generateBook = useCallback(() => {
+        if (!outline.trim()) {
+          setError('大纲是空的哦，写点什么吧！');
+          return;
+        }
+        setIsGenerating(true);
+        setError(null);
+        setCurrentPageIndex(0);
+
+        const parsedPages = outlineToPages(outline.trim());
+        // If user modified outline, we may not have english prompts. Try to reuse or regenerate.
+        const newPages = parsedPages.map((p, index) => {
+          let englishPrompt = p.englishPrompt;
+          if (!englishPrompt && storyPages[index]) {
+            englishPrompt = storyPages[index].englishPrompt;
+          }
+          if (!englishPrompt) {
+            // Fallback prompt
+            englishPrompt = `cute child adventure, ${p.chineseText.slice(0, 40)}, cute children book illustration, highly detailed, magical lighting, whimsical, vibrant colors, kawaii`;
+          }
+          const encodedPrompt = encodeURIComponent(englishPrompt);
+          const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=1000&nologo=true&seed=${Date.now() + index}`;
+          return {
+            id: Date.now() + index,
+            text: p.chineseText,
+            imageUrl,
+            loaded: false,
+            phase: p.phase,
+          };
+        });
+
+        setPages(newPages);
+        setIsGenerating(false);
+        setPhase(PHASES.BOOK);
+
+        newPages.forEach((page) => {
+          const img = new Image();
+          img.onload = () => setPages(prev => prev.map(p => p.id === page.id ? { ...p, loaded: true } : p));
+          img.onerror = () => setPages(prev => prev.map(p => p.id === page.id ? { ...p, loaded: true, error: true } : p));
+          img.src = page.imageUrl;
+        });
+      }, [outline, storyPages]);
+
+      const regeneratePage = useCallback((pageId) => {
+        const seed = Date.now();
+        setPages(prev => {
+          let newUrl = '';
+          const updated = prev.map(p => {
+            if (p.id === pageId) {
+              const page = prev.find(x => x.id === pageId);
+              const fallbackPrompt = `cute child adventure, ${page?.text?.slice(0, 40) || 'magical story'}, cute children book illustration, highly detailed, magical lighting, whimsical, vibrant colors, kawaii`;
+              const encodedPrompt = encodeURIComponent(page?.englishPrompt || fallbackPrompt);
+              newUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=1000&nologo=true&seed=${seed}`;
+              return { ...p, imageUrl: newUrl, loaded: false, error: false };
+            }
+            return p;
+          });
+          if (newUrl) {
+            const img = new Image();
+            img.onload = () => setPages(prev2 => prev2.map(p => p.id === pageId ? { ...p, loaded: true } : p));
+            img.onerror = () => setPages(prev2 => prev2.map(p => p.id === pageId ? { ...p, loaded: true, error: true } : p));
+            img.src = newUrl;
+          }
+          return updated;
+        });
+      }, []);
+
+      useEffect(() => {
+        if (phase === PHASES.BOOK && pages.length > 0) {
+          setTimeout(() => {
+            if (bookRef.current) bookRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
+      }, [phase, pages.length]);
+
+      const clearAll = () => {
+        if (window.confirm('确定要重新开始吗？')) {
+          setPhase(PHASES.DRAWING);
+          setLineAnalysis(null);
+          setVoiceText('');
+          setOutline('');
+          setStoryPages([]);
+          setPages([]);
+          setCurrentPageIndex(0);
+          setError(null);
+        }
+      };
+
+      // ===== Phase Indicator =====
+      const PhaseDots = () => {
+        const phases = [
+          { key: PHASES.DRAWING, label: '画画', icon: '🎨' },
+          { key: PHASES.VOICE, label: '讲故事', icon: '🎤' },
+          { key: PHASES.OUTLINE, label: '大纲', icon: '📝' },
+          { key: PHASES.BOOK, label: '绘本', icon: '📖' },
+        ];
+        const currentIndex = phases.findIndex(p => p.key === phase);
+        return (
+          <div className="flex justify-center items-center gap-3 mb-6">
+            {phases.map((p, i) => {
+              const isActive = i === currentIndex;
+              const isDone = i < currentIndex;
+              return (
+                <div key={p.key} className="flex items-center gap-3">
+                  <div className={`flex flex-col items-center transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xl border-4 ${
+                      isActive ? 'bg-candy-pink border-pink-400 shadow-lg' :
+                      isDone ? 'bg-candy-mint border-green-400' :
+                      'bg-gray-200 border-gray-300'
+                    }`}>
+                      {isDone ? '✓' : p.icon}
+                    </div>
+                    <span className={`text-xs mt-1 font-bold kid-font ${isActive ? 'text-candy-pinkDark' : 'text-gray-400'}`}>
+                      {p.label}
+                    </span>
+                  </div>
+                  {i < phases.length - 1 && (
+                    <div className={`w-8 h-1 rounded-full ${isDone ? 'bg-candy-mint' : 'bg-gray-200'}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      };
+
+      // ===== Render: DRAWING Phase =====
+      const renderDrawingPhase = () => (
+        <div className="animate-fade-in space-y-5">
+          <div className="cartoon-card bg-white rounded-3xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-candy-pink flex items-center justify-center text-white text-xl">🎨</div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 kid-font">第一步：魔法画板</h2>
+                <p className="text-sm text-gray-500">画出你心里的故事心情线</p>
+              </div>
+            </div>
+
+            <MagicCanvas onLineComplete={handleLineComplete} onClear={handleClearLine} />
+
+            {lineAnalysis && (
+              <div className="mt-4 space-y-3 animate-pop">
+                <div className="cartoon-card bg-gradient-to-r from-candy-mint/30 to-candy-yellow/30 rounded-2xl p-4 border-candy-mintDark/30">
+                  <div className="flex items-center gap-2 mb-2">
+                    <SparklesIcon size={18} className="text-candy-orange" />
+                    <span className="font-bold text-gray-700 kid-font">魔法线条分析：</span>
+                  </div>
+                  <p className="text-lg text-gray-800 kid-font">
+                    <span className="text-candy-pinkDark font-bold">「{lineAnalysis.overallFeature.type}」</span>
+                    <span className="text-gray-600 text-base"> — {lineAnalysis.overallFeature.description}</span>
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {lineAnalysis.segments.map((seg, i) => (
+                    <div key={i} className="cartoon-card bg-white rounded-xl p-3 border-gray-200">
+                      <div className="text-xs font-black text-gray-400 mb-1">{seg.phase}</div>
+                      <p className="text-sm text-gray-700 kid-font leading-snug">{seg.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={goToVoice}
+                disabled={!lineAnalysis}
+                className="cartoon-btn px-8 py-3 bg-gradient-to-r from-candy-pink to-candy-pinkDark text-white rounded-2xl text-lg font-bold kid-font flex items-center gap-2 disabled:opacity-50"
+              >
+                下一步：讲故事
+                <ArrowRightIcon size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+
+      // ===== Render: VOICE Phase =====
+      const renderVoicePhase = () => (
+        <div className="animate-fade-in space-y-5">
+          <div className="cartoon-card bg-white rounded-3xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-candy-blue flex items-center justify-center text-white text-xl">🎤</div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 kid-font">第二步：魔法录音机</h2>
+                <p className="text-sm text-gray-500">对着麦克风说出你的故事</p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="speech-bubble p-4 mx-2">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-candy-yellow flex items-center justify-center text-xl flex-shrink-0">🐰</div>
+                  <div className="flex-1">
+                    {showGuide ? (
+                      <p className="text-gray-700 kid-font text-lg animate-fade-in">{GUIDE_MESSAGES[guideIndex]}</p>
+                    ) : (
+                      <p className="text-candy-pink kid-font text-lg animate-fade-in">我在听你说呢... ✨</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center mb-5">
+              <button
+                onClick={toggleRecording}
+                disabled={!speechSupported}
+                className={`cartoon-btn relative w-28 h-28 rounded-full flex items-center justify-center text-white ${
+                  isRecording
+                    ? 'bg-red-500 border-red-700 animate-pulse-soft'
+                    : speechSupported
+                    ? 'bg-gradient-to-br from-candy-pink to-purple-500 border-pink-700'
+                    : 'bg-gray-400 border-gray-600 cursor-not-allowed'
+                }`}
+              >
+                {isRecording ? (
+                  <div className="flex flex-col items-center">
+                    <Volume2Icon size={40} />
+                    <span className="text-xs mt-1 font-bold">听你说</span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <MicIcon size={40} />
+                    <span className="text-xs mt-1 font-bold">按我录音</span>
+                  </div>
+                )}
+              </button>
+              <p className="mt-3 text-sm font-bold text-gray-500 kid-font">
+                {isRecording ? '正在聆听... 大声说出你的故事！' : speechSupported ? '按住麦克风按钮开始说话' : '浏览器不支持语音哦'}
+              </p>
+              {interimText && (
+                <p className="mt-2 text-sm text-purple-500 kid-font animate-pulse">{interimText}</p>
+              )}
+            </div>
+
+            <div className="relative">
+              <textarea
+                value={voiceText}
+                onChange={(e) => setVoiceText(e.target.value)}
+                placeholder="你的故事会出现在这里，也可以直接打字输入哦..."
+                className="w-full h-40 p-4 rounded-2xl bg-candy-cream border-4 border-amber-200 resize-none text-gray-700 text-base leading-relaxed placeholder:text-gray-400 focus:border-candy-yellow transition-colors"
+              />
+              <div className="absolute bottom-3 right-3 text-xs text-gray-400 font-bold">{voiceText.length} 字</div>
+            </div>
+
+            <div className="mt-5 flex justify-between items-center">
+              <button
+                onClick={goBack}
+                className="cartoon-btn px-5 py-2.5 bg-gray-200 rounded-2xl text-gray-700 font-bold kid-font text-sm flex items-center gap-1"
+              >
+                <ChevronLeftIcon size={16} />
+                回去画画
+              </button>
+              <button
+                onClick={goToOutline}
+                disabled={!voiceText.trim()}
+                className="cartoon-btn px-6 py-2.5 bg-gradient-to-r from-candy-blue to-candy-blueDark text-white rounded-2xl font-bold kid-font text-base flex items-center gap-2 disabled:opacity-50"
+              >
+                查看魔法大纲
+                <SparklesIcon size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+
+      // ===== Render: OUTLINE Phase =====
+      const renderOutlinePhase = () => (
+        <div className="animate-fade-in space-y-5">
+          <div className="cartoon-card bg-white rounded-3xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-candy-orange flex items-center justify-center text-white text-xl">📝</div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 kid-font">第三步：魔法大纲</h2>
+                <p className="text-sm text-gray-500">看看魔法帮你写的故事，不满意可以改哦</p>
+              </div>
+            </div>
+
+            {lineAnalysis && (
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-candy-mint/40 text-candy-mintDark text-sm font-bold kid-font border-2 border-candy-mintDark/20">
+                  整体：{lineAnalysis.overallFeature.type}
+                </span>
+                {lineAnalysis.segments.map((s, i) => (
+                  <span key={i} className="px-2 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-bold kid-font">
+                    {s.phase}: {s.trend === 'up' ? '↗' : s.trend === 'down' ? '↘' : '→'} {s.yLevel === 'high' ? '高' : s.yLevel === 'low' ? '低' : '中'}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            <div className="relative">
+              <textarea
+                value={outline}
+                onChange={(e) => setOutline(e.target.value)}
+                className="w-full h-80 p-5 rounded-2xl bg-candy-cream border-4 border-amber-200 resize-none text-gray-700 text-base leading-relaxed focus:border-candy-yellow transition-colors kid-font"
+              />
+              <div className="absolute top-3 right-3">
+                <span className="text-xs text-gray-400 font-bold bg-white/70 px-2 py-1 rounded-full">可以修改哦</span>
+              </div>
+            </div>
+
+            <div className="mt-5 flex justify-between items-center">
+              <button
+                onClick={goBack}
+                className="cartoon-btn px-5 py-2.5 bg-gray-200 rounded-2xl text-gray-700 font-bold kid-font text-sm flex items-center gap-1"
+              >
+                <ChevronLeftIcon size={16} />
+                回去录音
+              </button>
+              <button
+                onClick={generateBook}
+                disabled={isGenerating || !outline.trim()}
+                className={`cartoon-btn px-8 py-3 rounded-2xl text-white text-lg font-bold kid-font flex items-center gap-2 ${
+                  isGenerating || !outline.trim()
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-purple-500 to-candy-pink border-purple-700'
+                }`}
+              >
+                {isGenerating ? (
+                  <>
+                    <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+                    魔法生成中...
+                  </>
+                ) : (
+                  <>
+                    <Wand2Icon size={22} />
+                    变成魔法书！
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+
+      // ===== Render: BOOK Phase =====
+      const renderBookPhase = () => (
+        <div className="animate-fade-in space-y-5">
+          <div ref={bookRef} className="cartoon-card bg-white rounded-3xl p-6 md:p-8">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-candy-lavender flex items-center justify-center text-white text-xl">📖</div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-800 kid-font">你的魔法绘本</h2>
+                  <p className="text-sm text-gray-500">{pages.length} 页精彩故事</p>
+                </div>
+              </div>
+              <span className="text-lg font-bold text-candy-pink kid-font">
+                {currentPageIndex + 1} / {pages.length}
+              </span>
+            </div>
+
+            <div className="relative">
+              {pages.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setCurrentPageIndex(p => Math.max(0, p - 1))}
+                    disabled={currentPageIndex === 0}
+                    className="cartoon-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-12 h-12 rounded-full bg-candy-yellow flex items-center justify-center text-amber-800 disabled:opacity-30"
+                  >
+                    <ChevronLeftIcon size={24} />
+                  </button>
+                  <button
+                    onClick={() => setCurrentPageIndex(p => Math.min(pages.length - 1, p + 1))}
+                    disabled={currentPageIndex === pages.length - 1}
+                    className="cartoon-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-12 h-12 rounded-full bg-candy-yellow flex items-center justify-center text-amber-800 disabled:opacity-30"
+                  >
+                    <ChevronRightIcon size={24} />
+                  </button>
+                </>
+              )}
+
+              <div className="overflow-hidden rounded-2xl">
+                <div
+                  className="flex transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${currentPageIndex * 100}%)` }}
+                >
+                  {pages.map((page, index) => (
+                    <div key={page.id} className="w-full flex-shrink-0 px-6 py-4">
+                      <div
+                        className="polaroid-kid rounded-3xl p-5 mx-auto max-w-sm"
+                        style={{ transform: `rotate(${(index % 2 === 0 ? -1.5 : 1.5)}deg)` }}
+                      >
+                        <div className="aspect-[4/5] relative rounded-2xl overflow-hidden bg-gray-100 mb-4 border-4 border-gray-100">
+                          {!page.loaded ? (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-candy-cream">
+                              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-candy-pink/30 to-candy-yellow/30 animate-pulse-soft mb-3 flex items-center justify-center text-3xl">🎨</div>
+                              <p className="text-gray-500 kid-font text-lg">魔法画笔在画画...</p>
+                            </div>
+                          ) : page.error ? (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-candy-cream">
+                              <span className="text-5xl mb-2">😅</span>
+                              <p className="text-gray-500 kid-font">画笔没墨了</p>
+                              <button
+                                onClick={() => regeneratePage(page.id)}
+                                className="mt-2 text-candy-pink kid-font font-bold underline"
+                              >
+                                再试一次
+                              </button>
+                            </div>
+                          ) : (
+                            <img
+                              src={page.imageUrl}
+                              alt={`第${index + 1}页`}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          )}
+                        </div>
+
+                        <div className="px-2">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-black text-gray-400 uppercase tracking-wider kid-font">
+                              第 {index + 1} 页 · {page.phase}
+                            </span>
+                            <button
+                              onClick={() => regeneratePage(page.id)}
+                              className="text-gray-400 hover:text-candy-pink transition-colors wiggle-hover"
+                              title="重新画这张图"
+                            >
+                              <RotateCcwIcon size={16} />
+                            </button>
+                          </div>
+                          <p className="kid-font text-gray-800 text-base leading-relaxed">
+                            {page.text}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {pages.length > 1 && (
+              <div className="flex justify-center gap-3 mt-5">
+                {pages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPageIndex(index)}
+                    className={`w-4 h-4 rounded-full border-2 border-gray-300 transition-all ${
+                      index === currentPageIndex
+                        ? 'bg-candy-pink border-candy-pink scale-125'
+                        : 'bg-white hover:bg-gray-100'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {pages.length > 1 && (
+              <div className="mt-6 flex gap-3 overflow-x-auto custom-scrollbar pb-2 px-2">
+                {pages.map((page, index) => (
+                  <button
+                    key={page.id}
+                    onClick={() => setCurrentPageIndex(index)}
+                    className={`flex-shrink-0 w-20 h-24 rounded-xl overflow-hidden border-4 transition-all ${
+                      index === currentPageIndex
+                        ? 'border-candy-pink shadow-md scale-105'
+                        : 'border-transparent opacity-50 hover:opacity-100'
+                    }`}
+                  >
+                    {page.loaded && !page.error ? (
+                      <img src={page.imageUrl} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-candy-cream flex items-center justify-center">
+                        <span className="text-lg kid-font text-gray-400">{index + 1}</span>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-between items-center">
+              <button
+                onClick={goBack}
+                className="cartoon-btn px-5 py-2.5 bg-gray-200 rounded-2xl text-gray-700 font-bold kid-font text-sm flex items-center gap-1"
+              >
+                <ChevronLeftIcon size={16} />
+                修改大纲
+              </button>
+              <button
+                onClick={clearAll}
+                className="cartoon-btn px-5 py-2.5 bg-candy-yellow rounded-2xl text-amber-800 font-bold kid-font text-sm flex items-center gap-1"
+              >
+                <SparklesIcon size={16} />
+                再讲一个故事
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+
+      return (
+        <div className="min-h-screen pb-12 star-bg">
+          <header className="pt-6 pb-4 px-4 text-center">
+            <div className="animate-float inline-block mb-2">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-candy-pink to-candy-orange flex items-center justify-center text-white text-3xl shadow-lg border-4 border-white">
+                🦄
+              </div>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-black text-gray-800 tracking-tight mb-1 kid-font">
+              Dreams Come True
+            </h1>
+            <p className="text-gray-600 text-base kid-font">
+              画出心情 · 说出故事 · 变成魔法书
+            </p>
+          </header>
+
+          <main className="max-w-2xl mx-auto px-4">
+            {error && (
+              <div className="animate-fade-in cartoon-card bg-red-50 rounded-2xl p-4 border-red-300 mb-5 flex items-start gap-3">
+                <div className="text-red-500 text-xl">😮</div>
+                <div className="flex-1">
+                  <p className="text-red-700 font-bold kid-font text-lg">{error}</p>
+                </div>
+                <button onClick={() => setError(null)} className="text-red-400 hover:text-red-600 text-xl font-bold">
+                  ×
+                </button>
+              </div>
+            )}
+
+            <PhaseDots />
+
+            {phase === PHASES.DRAWING && renderDrawingPhase()}
+            {phase === PHASES.VOICE && renderVoicePhase()}
+            {phase === PHASES.OUTLINE && renderOutlinePhase()}
+            {phase === PHASES.BOOK && renderBookPhase()}
+          </main>
+
+          <footer className="mt-12 text-center pb-8">
+            <div className="flex justify-center gap-2 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <StarIcon key={i} size={16} className="text-candy-yellow" />
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 kid-font">
+              Made with magic for little dreamers · 图片由 Pollinations.ai 生成
+            </p>
+          </footer>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
